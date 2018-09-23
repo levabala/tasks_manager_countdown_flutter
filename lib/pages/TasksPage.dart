@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'TasksListView.dart';
-import 'TasksViewConfig.dart';
+import 'AddTaskPage.dart';
+import '../TasksListView.dart';
+import '../TasksViewConfig.dart';
 
 class TasksPage extends StatefulWidget {
   final title = "My Tasks";
@@ -19,10 +21,17 @@ class _TasksPageState extends State<TasksPage> {
       ),
       body: new TasksListView(widget.viewConfig),
       floatingActionButton: new FloatingActionButton(
-        onPressed: null,
+        onPressed: () {
+          Navigator.of(context).push(AddTaskPageRoute());
+        },
         tooltip: 'Increment',
         child: new Icon(Icons.add),
       ),
     );
   }
+}
+
+class AddTaskPageRoute extends CupertinoPageRoute {
+  AddTaskPageRoute()
+      : super(builder: (BuildContext context) => new AddTaskPage());
 }

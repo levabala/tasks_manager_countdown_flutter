@@ -4,7 +4,6 @@ import 'TasksManager.dart' show tasksManager;
 import 'TasksViewConfig.dart';
 
 class TasksListView extends StatelessWidget {
-  final DateTime maxDeadline = tasksManager.maxDeadline;
   final TasksViewConfig viewConfig;
   TasksListView(this.viewConfig);
 
@@ -14,7 +13,10 @@ class TasksListView extends StatelessWidget {
       itemCount: tasksManager.tasks.length,
       itemBuilder: (context, index) {
         return new TaskListItem(
-            tasksManager.tasks[index], maxDeadline, viewConfig);
+            task: tasksManager.tasks[index],
+            maxDeadline: tasksManager.maxDeadline,
+            minDeadline: tasksManager.minDeadline,
+            viewConfig: viewConfig);
       },
     );
   }

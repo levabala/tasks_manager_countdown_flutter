@@ -1,13 +1,15 @@
 class TaskC {
   String name;
+  String description;
   double progress;
   DateTime deadline;
   List<String> tags;
 
-  TaskC({name, tags, deadline, progress = 0.0}) {
-    this.name = name;
-    this.progress = progress;
-    this.tags = tags;
-    this.deadline = deadline;
-  }
+  TaskC({
+    this.name,
+    this.tags,
+    this.deadline,
+    this.description = "",
+    this.progress = 0.0,
+  });
 }
