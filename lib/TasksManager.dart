@@ -1,4 +1,4 @@
-import 'TaskC.dart';
+import 'package:tasks_manager_countdown_flutter/TaskC.dart';
 
 class _TasksManager {
   DateTime maxDeadline = DateTime.fromMicrosecondsSinceEpoch(0);

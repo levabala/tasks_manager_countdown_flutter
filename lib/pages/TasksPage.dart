@@ -18,6 +18,14 @@ class _TasksPageState extends State<TasksPage> {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(widget.title),
+        actions: <Widget>[
+          IconButton(
+            icon: new Icon(Icons.filter),
+            onPressed: () {
+              print("filter");
+            },
+          )
+        ],
       ),
       body: new TasksListView(widget.viewConfig),
       floatingActionButton: new FloatingActionButton(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'TaskC.dart';
+import 'package:tasks_manager_countdown_flutter/TaskC.dart';
 import './pages/TasksPage.dart';
 import 'TasksManager.dart' show tasksManager;
 

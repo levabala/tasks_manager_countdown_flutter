@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tasks_manager_countdown_flutter/TaskC.dart';
 import '../CreateTaskForm.dart';
+import '../TasksManager.dart' show tasksManager;
 
 class AddTaskPage extends StatefulWidget {
   @override
@@ -9,7 +11,9 @@ class AddTaskPage extends StatefulWidget {
 }
 
 class AddTaskPageState extends State<AddTaskPage> {
+  //TODO: checkout how TaskAddFormState builds
   final addTaskFormKey = new GlobalKey<FormState>();
+  final addTaskStateKey = new GlobalKey<AddTaskFormState>();
   final _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
@@ -23,17 +27,24 @@ class AddTaskPageState extends State<AddTaskPage> {
         padding: EdgeInsets.all(10.0),
         child: new Column(
           children: <Widget>[
-            AddTaskForm(formKey: addTaskFormKey),
+            AddTaskForm(
+              formKey: addTaskFormKey,
+              stateKey: addTaskStateKey,
+            ),
           ],
         ),
       ),
       floatingActionButton: new FloatingActionButton(
         onPressed: () {
-          bool validated = addTaskFormKey.currentState.validate();
-          print(validated);
+          FormState formState = addTaskFormKey.currentState;
+          bool validated = formState.validate();
           if (validated) {
+            formState.save();
+            TaskC task = addTaskStateKey.currentState.task;
+            tasksManager.addTask(task);
+
             _scaffoldKey.currentState
-                .showSnackBar(SnackBar(content: Text('Track saved')));
+                .showSnackBar(SnackBar(content: Text('Track added')));
             FocusScope.of(context).requestFocus(new FocusNode());
           }
         },
