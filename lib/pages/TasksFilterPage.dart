@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_range_slider/flutter_range_slider.dart';
-import 'package:tasks_manager_countdown_flutter/Filter.dart';
-import 'package:tasks_manager_countdown_flutter/Range.dart';
-import 'package:tasks_manager_countdown_flutter/FiltersManager.dart'
-    show filtersManager;
-import 'package:tasks_manager_countdown_flutter/ViewConfigsManager.dart'
-    show viewConfigsManager;
+import 'package:todo_countdown/Filter.dart';
+import 'package:todo_countdown/Range.dart';
+import 'package:todo_countdown/FiltersManager.dart' show filtersManager;
+import 'package:todo_countdown/ViewConfigsManager.dart' show viewConfigsManager;
 import '../StringGenerators.dart' show remainTimeToString;
 import 'dart:math';
 

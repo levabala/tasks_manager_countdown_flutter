@@ -1,5 +1,5 @@
-import 'package:tasks_manager_countdown_flutter/TaskC.dart';
-import 'package:tasks_manager_countdown_flutter/Range.dart';
+import 'package:todo_countdown/TaskC.dart';
+import 'package:todo_countdown/Range.dart';
 import 'dart:convert';
 
 typedef bool FilterCondition(TaskC task);

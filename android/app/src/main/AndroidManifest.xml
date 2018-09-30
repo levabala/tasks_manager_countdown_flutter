@@ -14,7 +14,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="tasks_manager_countdown_flutter"
+        android:label="todo_countdown"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

@@ -1,11 +1,9 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tasks_manager_countdown_flutter/Filter.dart';
-import 'package:tasks_manager_countdown_flutter/Range.dart';
-import 'package:tasks_manager_countdown_flutter/TaskC.dart';
-import 'package:tasks_manager_countdown_flutter/TasksManager.dart'
-    show tasksManager;
-import 'package:tasks_manager_countdown_flutter/FiltersManager.dart'
-    show filtersManager;
+import 'package:todo_countdown/Filter.dart';
+import 'package:todo_countdown/Range.dart';
+import 'package:todo_countdown/TaskC.dart';
+import 'package:todo_countdown/TasksManager.dart' show tasksManager;
+import 'package:todo_countdown/FiltersManager.dart' show filtersManager;
 
 class _AppConfigurator {
   void writeToStorage() async {

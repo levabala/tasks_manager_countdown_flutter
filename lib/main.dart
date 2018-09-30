@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tasks_manager_countdown_flutter/TasksViewConfig.dart';
-import 'package:tasks_manager_countdown_flutter/ViewConfigsManager.dart';
+import 'package:todo_countdown/TasksViewConfig.dart';
+import 'package:todo_countdown/ViewConfigsManager.dart';
 import './pages/TasksPage.dart';
-import 'package:tasks_manager_countdown_flutter/AppConfigurator.dart'
-    show appConfigurator;
+import 'package:todo_countdown/AppConfigurator.dart' show appConfigurator;
 
 void main() {
   loadConfiguration();
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'TasksManagerCountdown',
+      title: 'ToDoCountdown',
       theme: new ThemeData(
         accentColor: Colors.grey[700],
         primaryColor: Colors.grey[800],

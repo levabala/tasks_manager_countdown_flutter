@@ -1,5 +1,5 @@
 import 'package:event_bus/event_bus.dart';
-import 'package:tasks_manager_countdown_flutter/TaskC.dart';
+import 'package:todo_countdown/TaskC.dart';
 
 EventBus eventBus = new EventBus();
 

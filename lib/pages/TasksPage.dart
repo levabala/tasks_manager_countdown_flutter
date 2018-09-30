@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tasks_manager_countdown_flutter/TasksListView.dart';
-import 'package:tasks_manager_countdown_flutter/TasksViewConfig.dart';
-import 'package:tasks_manager_countdown_flutter/pages/AddTaskPage.dart';
-import 'package:tasks_manager_countdown_flutter/pages/TasksFilterPage.dart';
+import 'package:todo_countdown/TasksListView.dart';
+import 'package:todo_countdown/TasksViewConfig.dart';
+import 'package:todo_countdown/pages/AddTaskPage.dart';
+import 'package:todo_countdown/pages/TasksFilterPage.dart';
 
 class TasksPage extends StatefulWidget {
   final title = "My Tasks";

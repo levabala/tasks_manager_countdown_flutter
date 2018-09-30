@@ -1,7 +1,6 @@
 import 'dart:convert';
-import 'package:tasks_manager_countdown_flutter/Filter.dart';
-import 'package:tasks_manager_countdown_flutter/AppConfigurator.dart'
-    show appConfigurator;
+import 'package:todo_countdown/Filter.dart';
+import 'package:todo_countdown/AppConfigurator.dart' show appConfigurator;
 
 class _FiltersManager {
   Map<String, Filter> filters = {};
