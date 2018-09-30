@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:todo_countdown/Filter.dart';
-import 'package:todo_countdown/AppConfigurator.dart' show appConfigurator;
+import 'package:todo_countdown/classes/Filter.dart';
+import 'package:todo_countdown/managers/AppConfigurator.dart';
 
 class _FiltersManager {
   Map<String, Filter> filters = {};

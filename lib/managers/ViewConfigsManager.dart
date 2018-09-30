@@ -1,4 +1,4 @@
-import 'package:todo_countdown/TasksViewConfig.dart';
+import 'package:todo_countdown/classes/TasksViewConfig.dart';
 
 class _ViewConfigsManager {
   Map<String, TasksViewConfig> configs = {};

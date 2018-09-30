@@ -1,9 +1,10 @@
-import 'package:todo_countdown/Filter.dart';
+import 'package:todo_countdown/classes/Filter.dart';
 import 'package:test/test.dart';
-import 'package:todo_countdown/TasksManager.dart' show tasksManager;
-import 'package:todo_countdown/FiltersManager.dart' show filtersManager;
-import 'package:todo_countdown/Range.dart';
-import 'package:todo_countdown/TaskC.dart';
+import 'package:todo_countdown/managers/TasksManager.dart' show tasksManager;
+import 'package:todo_countdown/managers/FiltersManager.dart'
+    show filtersManager;
+import 'package:todo_countdown/classes/Range.dart';
+import 'package:todo_countdown/classes/TaskC.dart';
 
 void main() {
   test("Task serialization test", () {

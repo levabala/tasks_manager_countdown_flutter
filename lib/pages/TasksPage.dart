@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_countdown/TasksListView.dart';
-import 'package:todo_countdown/TasksViewConfig.dart';
+import 'package:todo_countdown/widgets/TasksListView.dart';
+import 'package:todo_countdown/classes/TasksViewConfig.dart';
 import 'package:todo_countdown/pages/AddTaskPage.dart';
 import 'package:todo_countdown/pages/TasksFilterPage.dart';
 
@@ -14,6 +14,17 @@ class TasksPage extends StatefulWidget {
 }
 
 class _TasksPageState extends State<TasksPage> {
+  List<Widget> bottomAppBarIcons = [
+    IconButton(
+      icon: Icon(Icons.menu),
+      onPressed: () {},
+    ),
+    IconButton(
+      icon: Icon(Icons.search),
+      onPressed: () {},
+    )
+  ];
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -35,6 +46,16 @@ class _TasksPageState extends State<TasksPage> {
         },
         tooltip: 'Increment',
         child: new Icon(Icons.add),
+      ),
+      bottomNavigationBar: AnimatedContainer(
+        duration: Duration(seconds: 3),
+        child: BottomAppBar(
+          child: new Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: bottomAppBarIcons,
+          ),
+        ),
       ),
     );
   }

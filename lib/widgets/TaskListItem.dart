@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:todo_countdown/TaskC.dart';
-import 'dart:math' as math;
-import 'TasksViewConfig.dart';
-import 'StringGenerators.dart' show finishDateToString, remainTimeToString;
+import 'package:todo_countdown/classes/TaskC.dart';
+import 'dart:math';
+
+import 'package:todo_countdown/classes/TasksViewConfig.dart';
+import 'package:todo_countdown/other/StringGenerators.dart';
 
 class TaskListItem extends StatefulWidget {
   final TaskC task;
@@ -50,7 +51,7 @@ class TaskListItemState extends State<TaskListItem> {
     double coeff = maxRange == 0.0
         ? 1.0
         : (happened ? 1 - diffFromMaxMs / maxRange : diffFromMaxMs / maxRange);
-    coeff = math.pow(coeff, widget.viewConfig.valuePower);
+    coeff = pow(coeff, widget.viewConfig.valuePower);
 
     return ListTile(
       title: new Container(

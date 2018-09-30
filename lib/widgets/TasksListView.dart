@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:todo_countdown/Events.dart';
-import 'package:todo_countdown/Filter.dart';
-import 'package:todo_countdown/TaskC.dart';
-import 'package:todo_countdown/TaskListItem.dart';
-import 'package:todo_countdown/TasksManager.dart' show tasksManager;
-import 'package:todo_countdown/FiltersManager.dart' show filtersManager;
-import 'package:todo_countdown/ViewConfigsManager.dart' show viewConfigsManager;
+import 'package:todo_countdown/classes/Events.dart';
+import 'package:todo_countdown/classes/Filter.dart';
+import 'package:todo_countdown/classes/TaskC.dart';
+import 'package:todo_countdown/widgets/TaskListItem.dart';
+import 'package:todo_countdown/managers/TasksManager.dart';
+import 'package:todo_countdown/managers/FiltersManager.dart';
+import 'package:todo_countdown/managers/ViewConfigsManager.dart';
 
 class TasksListView extends StatefulWidget {
   TasksListView();

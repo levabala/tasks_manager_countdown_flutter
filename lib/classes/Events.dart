@@ -1,5 +1,5 @@
 import 'package:event_bus/event_bus.dart';
-import 'package:todo_countdown/TaskC.dart';
+import 'package:todo_countdown/classes/TaskC.dart';
 
 EventBus eventBus = new EventBus();
 

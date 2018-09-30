@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:intl/intl.dart';
-import 'package:todo_countdown/TaskC.dart';
+import 'package:todo_countdown/classes/TaskC.dart';
 
 class AddTaskForm extends StatefulWidget {
   final GlobalKey<FormState> formKey;
@@ -31,7 +31,10 @@ class AddTaskFormState extends State<AddTaskForm> {
           TextFormField(
             autofocus: true,
             keyboardType: TextInputType.text,
-            decoration: InputDecoration(hintText: "Task name..."),
+            decoration: InputDecoration(
+              hintText: "Task name...",
+            ),
+            textCapitalization: TextCapitalization.words,
             onEditingComplete: () {
               widget.formKey.currentState.validate();
             },
@@ -49,21 +52,20 @@ class AddTaskFormState extends State<AddTaskForm> {
             maxLines: null,
             decoration:
                 InputDecoration(hintText: "Task description (multiline)..."),
+            textCapitalization: TextCapitalization.sentences,
             onEditingComplete: () {
               widget.formKey.currentState.validate();
-            },
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
             },
             onSaved: (description) {
               task.description = description;
             },
           ),
           DateTimePickerFormField(
+            dateOnly: true,
             format: new DateFormat("'Finish date:' MMMM d, yyyy 'at' h:mma"),
-            decoration: InputDecoration(hintText: "Finish date&time"),
+            decoration: InputDecoration(
+              hintText: "Finish date&time",
+            ),
             onChanged: (date) {
               widget.formKey.currentState.validate();
             },

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todo_countdown/TaskC.dart';
-import '../CreateTaskForm.dart';
-import '../TasksManager.dart' show tasksManager;
+import 'package:todo_countdown/widgets/AddTaskForm.dart';
+import 'package:todo_countdown/classes/TaskC.dart';
+import 'package:todo_countdown/managers/TasksManager.dart';
 
 class AddTaskPage extends StatefulWidget {
   @override

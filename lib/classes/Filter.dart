@@ -1,5 +1,5 @@
-import 'package:todo_countdown/TaskC.dart';
-import 'package:todo_countdown/Range.dart';
+import 'package:todo_countdown/classes/TaskC.dart';
+import 'package:todo_countdown/classes/Range.dart';
 import 'dart:convert';
 
 typedef bool FilterCondition(TaskC task);

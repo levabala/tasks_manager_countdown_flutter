@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:todo_countdown/TasksViewConfig.dart';
-import 'package:todo_countdown/ViewConfigsManager.dart';
+import 'package:todo_countdown/classes/TasksViewConfig.dart';
+import 'package:todo_countdown/managers/ViewConfigsManager.dart';
 import './pages/TasksPage.dart';
-import 'package:todo_countdown/AppConfigurator.dart' show appConfigurator;
+import 'package:todo_countdown/managers/AppConfigurator.dart'
+    show appConfigurator;
 
 void main() {
   loadConfiguration();

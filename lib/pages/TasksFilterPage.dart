@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_range_slider/flutter_range_slider.dart';
-import 'package:todo_countdown/Filter.dart';
-import 'package:todo_countdown/Range.dart';
-import 'package:todo_countdown/FiltersManager.dart' show filtersManager;
-import 'package:todo_countdown/ViewConfigsManager.dart' show viewConfigsManager;
-import '../StringGenerators.dart' show remainTimeToString;
+import 'package:todo_countdown/classes/Filter.dart';
+import 'package:todo_countdown/classes/Range.dart';
+import 'package:todo_countdown/managers/FiltersManager.dart';
+import 'package:todo_countdown/managers/ViewConfigsManager.dart';
+import 'package:todo_countdown/other/StringGenerators.dart';
 import 'dart:math';
 
 class FilterTaskPage extends StatefulWidget {
