@@ -11,7 +11,6 @@ class AddTaskPage extends StatefulWidget {
 }
 
 class AddTaskPageState extends State<AddTaskPage> {
-  //TODO: checkout how TaskAddFormState builds
   final addTaskFormKey = new GlobalKey<FormState>();
   final addTaskStateKey = new GlobalKey<AddTaskFormState>();
   final _scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -44,7 +43,7 @@ class AddTaskPageState extends State<AddTaskPage> {
             tasksManager.addTask(task);
 
             _scaffoldKey.currentState
-                .showSnackBar(SnackBar(content: Text('Track added')));
+                .showSnackBar(SnackBar(content: Text('Task added')));
             FocusScope.of(context).requestFocus(new FocusNode());
           }
         },

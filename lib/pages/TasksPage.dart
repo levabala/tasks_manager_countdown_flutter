@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tasks_manager_countdown_flutter/pages/TasksFilterPage.dart';
 import 'AddTaskPage.dart';
 import '../TasksListView.dart';
 import '../TasksViewConfig.dart';
@@ -20,9 +21,9 @@ class _TasksPageState extends State<TasksPage> {
         title: new Text(widget.title),
         actions: <Widget>[
           IconButton(
-            icon: new Icon(Icons.filter),
+            icon: new Icon(Icons.filter_list),
             onPressed: () {
-              print("filter");
+              Navigator.of(context).push(FilterTaskPageRoute());
             },
           )
         ],
@@ -42,4 +43,9 @@ class _TasksPageState extends State<TasksPage> {
 class AddTaskPageRoute extends CupertinoPageRoute {
   AddTaskPageRoute()
       : super(builder: (BuildContext context) => new AddTaskPage());
+}
+
+class FilterTaskPageRoute extends CupertinoPageRoute {
+  FilterTaskPageRoute()
+      : super(builder: (BuildContext context) => new FilterTaskPage());
 }

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:tasks_manager_countdown_flutter/TaskC.dart';
 
 class _TasksManager {
@@ -16,6 +17,22 @@ class _TasksManager {
 
   void addTasks(List<TaskC> tasks) {
     for (TaskC task in tasks) addTask(task);
+  }
+
+  void loadJSONData(json) {
+    var data = jsonDecode(json);
+    for (var task in data) {
+      tasks.add(task);
+    }
+  }
+
+  String toJSON() {
+    List<String> data = [];
+    for (var task in tasks) {
+      data.add(task.toJSON());
+    }
+    var json = jsonEncode(data);
+    return json;
   }
 }
 
