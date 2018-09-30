@@ -6,13 +6,15 @@ import 'StringGenerators.dart' show finishDateToString, remainTimeToString;
 
 class TaskListItem extends StatefulWidget {
   final TaskC task;
-  final DateTime maxDeadline;
-  final DateTime minDeadline;
+  final DateTime maxDeadline, maxDeadlinePast;
+  final DateTime minDeadline, minDeadlinePast;
   final TasksViewConfig viewConfig;
   TaskListItem({
-    this.task,
-    this.maxDeadline,
-    this.minDeadline,
+    @required this.task,
+    @required this.maxDeadline,
+    @required this.minDeadline,
+    @required this.maxDeadlinePast,
+    @required this.minDeadlinePast,
     this.viewConfig,
   });
 
@@ -28,15 +30,26 @@ class TaskListItemState extends State<TaskListItem> {
     DateTime nowTime = DateTime.now();
     int nowMs = nowTime.millisecondsSinceEpoch;
     int taskDeadlineMs = widget.task.deadline.millisecondsSinceEpoch;
-    int maxDeadlineMs = widget.maxDeadline.millisecondsSinceEpoch;
-    int minDeadlineMs = widget.minDeadline.millisecondsSinceEpoch;
     int diffMs = taskDeadlineMs - nowMs;
     bool happened = diffMs <= 0;
-    diffMs = diffMs.abs();
+    int maxDeadlineMs, minDeadlineMs, diffFromMaxMs, maxRange;
+    if (happened) {
+      maxDeadlineMs = widget.maxDeadlinePast.millisecondsSinceEpoch;
+      minDeadlineMs = widget.minDeadlinePast.millisecondsSinceEpoch;
+      maxRange = maxDeadlineMs - minDeadlineMs;
+      diffFromMaxMs = maxDeadlineMs - taskDeadlineMs;
+      diffMs = diffMs.abs();
+    } else {
+      maxDeadlineMs = widget.maxDeadline.millisecondsSinceEpoch;
+      minDeadlineMs = widget.minDeadline.millisecondsSinceEpoch;
+      maxRange = maxDeadlineMs - minDeadlineMs;
+      diffFromMaxMs = maxDeadlineMs - taskDeadlineMs;
+      diffMs = diffMs.abs();
+    }
 
-    double coeff = 1 -
-        (diffMs) /
-            (happened ? (nowMs - minDeadlineMs) : (maxDeadlineMs - nowMs));
+    double coeff = maxRange == 0.0
+        ? 1.0
+        : (happened ? 1 - diffFromMaxMs / maxRange : diffFromMaxMs / maxRange);
     coeff = math.pow(coeff, widget.viewConfig.valuePower);
 
     return ListTile(

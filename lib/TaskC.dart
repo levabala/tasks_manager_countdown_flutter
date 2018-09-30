@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+
 class TaskC {
   String name;
   String description;
@@ -12,8 +14,8 @@ class TaskC {
   List<String> tags;
 
   TaskC({
-    this.name,
-    this.tags,
+    @required this.name,
+    this.tags = const [],
     this.deadline,
     this.description = "",
     this.progress = 0.0,

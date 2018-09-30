@@ -1,4 +1,10 @@
 class TasksViewConfig {
-  int valuePower;
-  TasksViewConfig({this.valuePower = 8});
+  double valuePower;
+  bool showPastTasks;
+  TasksViewConfig({this.valuePower = 3.0, this.showPastTasks = false});
+
+  void update(newConfig) {
+    this.valuePower = newConfig.valuePower;
+    this.showPastTasks = newConfig.showPastTasks;
+  }
 }

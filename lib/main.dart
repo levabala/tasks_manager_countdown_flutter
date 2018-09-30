@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tasks_manager_countdown_flutter/TasksViewConfig.dart';
+import 'package:tasks_manager_countdown_flutter/ViewConfigsManager.dart';
 import './pages/TasksPage.dart';
 import 'package:tasks_manager_countdown_flutter/AppConfigurator.dart'
     show appConfigurator;
@@ -8,8 +10,9 @@ void main() {
   runApp(new MyApp());
 }
 
-void loadConfiguration() async {
-  appConfigurator.loadTestData();
+void loadConfiguration() {
+  appConfigurator.loadFromStorage();
+  viewConfigsManager.setConfig("main", TasksViewConfig());
 }
 
 class MyApp extends StatelessWidget {

@@ -27,8 +27,8 @@ class Filter {
     return json;
   }
 
-  Filter fromJSON(json) {
+  static Filter fromJSON(json) {
     var data = jsonDecode(json);
-    return Filter(name: data["name"], range: data["range"]);
+    return Filter(name: data["name"], range: Range.fromJSON(data["range"]));
   }
 }

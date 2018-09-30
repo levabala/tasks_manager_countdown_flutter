@@ -40,7 +40,7 @@ class AddTaskPageState extends State<AddTaskPage> {
           if (validated) {
             formState.save();
             TaskC task = addTaskStateKey.currentState.task;
-            tasksManager.addTask(task);
+            tasksManager.addTask(task: task);
 
             _scaffoldKey.currentState
                 .showSnackBar(SnackBar(content: Text('Task added')));

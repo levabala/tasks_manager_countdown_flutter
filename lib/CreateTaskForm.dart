@@ -14,12 +14,12 @@ class AddTaskForm extends StatefulWidget {
 }
 
 class TaskAddFormState extends FormState {
-  TaskC task = new TaskC();
+  TaskC task = new TaskC(name: "none");
   TaskAddFormState();
 }
 
 class AddTaskFormState extends State<AddTaskForm> {
-  TaskC task = new TaskC();
+  TaskC task = new TaskC(name: "none");
 
   @override
   Widget build(BuildContext context) {

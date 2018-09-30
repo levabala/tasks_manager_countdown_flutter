@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tasks_manager_countdown_flutter/TasksListView.dart';
+import 'package:tasks_manager_countdown_flutter/TasksViewConfig.dart';
+import 'package:tasks_manager_countdown_flutter/pages/AddTaskPage.dart';
 import 'package:tasks_manager_countdown_flutter/pages/TasksFilterPage.dart';
-import 'AddTaskPage.dart';
-import '../TasksListView.dart';
-import '../TasksViewConfig.dart';
 
 class TasksPage extends StatefulWidget {
   final title = "My Tasks";
@@ -28,7 +28,7 @@ class _TasksPageState extends State<TasksPage> {
           )
         ],
       ),
-      body: new TasksListView(widget.viewConfig),
+      body: new TasksListView(),
       floatingActionButton: new FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(AddTaskPageRoute());

@@ -1,5 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tasks_manager_countdown_flutter/Filter.dart';
+import 'package:tasks_manager_countdown_flutter/Range.dart';
 import 'package:tasks_manager_countdown_flutter/TaskC.dart';
 import 'package:tasks_manager_countdown_flutter/TasksManager.dart'
     show tasksManager;
@@ -10,16 +11,20 @@ class _AppConfigurator {
   void writeToStorage() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setString("filters", filtersManager.toJSON());
+    prefs.setString("tasks", tasksManager.toJSON());
   }
 
   void loadFromStorage() async {
     final prefs = await SharedPreferences.getInstance();
     var keys = prefs.getKeys();
     if (keys.length == 0) {
-      // what to do here?
+      filtersManager.setFilter(
+          id: "filter1", filter: Filter(name: "main", range: Range(0, 1)));
     } else {
-      filtersManager.loadJSONData(prefs.getString("filters"));
-      tasksManager.loadJSONData(prefs.getString("tasks"));
+      if (keys.contains("filters"))
+        filtersManager.loadJSONData(prefs.getString("filters"));
+      if (keys.contains("tasks"))
+        tasksManager.loadJSONData(prefs.getString("tasks"));
     }
   }
 

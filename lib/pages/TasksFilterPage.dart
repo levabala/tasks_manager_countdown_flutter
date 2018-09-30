@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_range_slider/flutter_range_slider.dart';
 import 'package:tasks_manager_countdown_flutter/Filter.dart';
+import 'package:tasks_manager_countdown_flutter/Range.dart';
 import 'package:tasks_manager_countdown_flutter/FiltersManager.dart'
     show filtersManager;
-import 'package:tasks_manager_countdown_flutter/Range.dart';
+import 'package:tasks_manager_countdown_flutter/ViewConfigsManager.dart'
+    show viewConfigsManager;
 import '../StringGenerators.dart' show remainTimeToString;
 import 'dart:math';
 
@@ -25,14 +27,17 @@ class FilterTaskPageState extends State<FilterTaskPage> {
     return maxPossibleMs - DateTime.now().millisecondsSinceEpoch;
   }
 
-  void updateFilter() {
-    Filter f = new Filter(
+  void updateFilter({bool finalized = true}) {
+    Filter filter = new Filter(
       range: RangeDynamic(
-        fromGetter: () => 0,
+        fromGetter: () => viewConfigsManager.configs["main"].showPastTasks
+            ? 0
+            : DateTime.now().millisecondsSinceEpoch,
         toGetter: () => DateTime.now().millisecondsSinceEpoch + timeDeltaMs,
       ),
     );
-    filtersManager.setFilter("filter1", f);
+    filtersManager.setFilter(
+        id: "filter1", filter: filter, finalized: finalized);
   }
 
   int getDeltaMs(value) {
@@ -67,8 +72,7 @@ class FilterTaskPageState extends State<FilterTaskPage> {
           child: new Column(
             children: <Widget>[
               SliderTheme(
-                data: SliderTheme.of(context).copyWith(
-                    valueIndicatorShape: PaddleSliderValueIndicatorShape()),
+                data: SliderTheme.of(context).copyWith(),
                 child: RangeSlider(
                   lowerValue: _lowerValue,
                   upperValue: _upperValue,
@@ -83,65 +87,33 @@ class FilterTaskPageState extends State<FilterTaskPage> {
                       timeDeltaMs = getDeltaMs(up);
                       timeDeltaStr = remainTimeToString(timeDeltaMs);
 
+                      updateFilter(finalized: false);
+                    });
+                  },
+                  onChangeEnd: (low, up) {
+                    setState(() {
+                      _upperValue = up;
+                      timeDeltaMs = getDeltaMs(up);
+                      timeDeltaStr = remainTimeToString(timeDeltaMs);
+
                       updateFilter();
                     });
                   },
                 ),
               ),
               Text("Max delta from now displayed: $timeDeltaStr"),
+              CheckboxListTile(
+                onChanged: (value) {
+                  setState(() {
+                    viewConfigsManager.configs["main"].showPastTasks = value;
+                    updateFilter(finalized: true);
+                  });
+                },
+                value: viewConfigsManager.configs["main"].showPastTasks,
+                title: Text("Include past tasks"),
+              )
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class RangeSliderSample extends StatefulWidget {
-  @override
-  _RangeSliderSampleState createState() => _RangeSliderSampleState();
-}
-
-class _RangeSliderSampleState extends State<RangeSliderSample> {
-  double _lowerValue = 20.0;
-  double _upperValue = 80.0;
-
-  @override
-  Widget build(BuildContext context) {
-    return new SafeArea(
-      top: false,
-      bottom: false,
-      child: new Scaffold(
-        appBar: new AppBar(title: new Text('RangeSlider Demo')),
-        body: new Container(
-          padding: const EdgeInsets.only(top: 50.0, left: 10.0, right: 10.0),
-          child: new Column(
-              children: <Widget>[]..add(
-                  new RangeSlider(
-                    min: 0.0,
-                    max: 100.0,
-                    lowerValue: _lowerValue,
-                    upperValue: _upperValue,
-                    divisions: 5,
-                    showValueIndicator: true,
-                    valueIndicatorMaxDecimals: 1,
-                    onChanged: (double newLowerValue, double newUpperValue) {
-                      setState(() {
-                        _lowerValue = newLowerValue;
-                        _upperValue = newUpperValue;
-                      });
-                    },
-                    onChangeStart:
-                        (double startLowerValue, double startUpperValue) {
-                      print(
-                          'Started with values: $startLowerValue and $startUpperValue');
-                    },
-                    onChangeEnd: (double newLowerValue, double newUpperValue) {
-                      print(
-                          'Ended with values: $newLowerValue and $newUpperValue');
-                    },
-                  ),
-                )),
         ),
       ),
     );
