@@ -4,6 +4,9 @@ import 'package:todo_countdown/classes/TaskC.dart';
 import 'package:todo_countdown/managers/TasksManager.dart';
 
 class AddTaskPage extends StatefulWidget {
+  final GlobalKey<ScaffoldState> mainPageKey;
+  AddTaskPage({@required this.mainPageKey});
+
   @override
   AddTaskPageState createState() {
     return AddTaskPageState();
@@ -13,12 +16,10 @@ class AddTaskPage extends StatefulWidget {
 class AddTaskPageState extends State<AddTaskPage> {
   final addTaskFormKey = new GlobalKey<FormState>();
   final addTaskStateKey = new GlobalKey<AddTaskFormState>();
-  final _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      key: _scaffoldKey,
       appBar: new AppBar(
         title: new Text("Add Task"),
       ),
@@ -42,9 +43,10 @@ class AddTaskPageState extends State<AddTaskPage> {
             TaskC task = addTaskStateKey.currentState.task;
             tasksManager.addTask(task: task);
 
-            _scaffoldKey.currentState
+            widget.mainPageKey.currentState
                 .showSnackBar(SnackBar(content: Text('Task added')));
-            FocusScope.of(context).requestFocus(new FocusNode());
+            Navigator.of(context).pop();
+            //FocusScope.of(context).requestFocus(new FocusNode());
           }
         },
         tooltip: 'Save',

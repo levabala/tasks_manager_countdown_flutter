@@ -14,6 +14,8 @@ class TasksPage extends StatefulWidget {
 }
 
 class _TasksPageState extends State<TasksPage> {
+  final scaffoldKey = new GlobalKey<ScaffoldState>();
+
   List<Widget> iconsDefault = [
     IconButton(
       icon: Icon(Icons.menu),
@@ -45,6 +47,7 @@ class _TasksPageState extends State<TasksPage> {
   Widget build(BuildContext context) {
     List<Widget> bottomAppBarIcons = iconsDefault;
     return new Scaffold(
+      key: scaffoldKey,
       appBar: new AppBar(
         title: new Text(widget.title),
         actions: <Widget>[
@@ -59,7 +62,7 @@ class _TasksPageState extends State<TasksPage> {
       body: new TasksListView(),
       floatingActionButton: new FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).push(AddTaskPageRoute());
+          Navigator.of(context).push(AddTaskPageRoute(scaffoldKey));
         },
         tooltip: 'Increment',
         child: new Icon(Icons.add),
@@ -79,8 +82,12 @@ class _TasksPageState extends State<TasksPage> {
 }
 
 class AddTaskPageRoute extends CupertinoPageRoute {
-  AddTaskPageRoute()
-      : super(builder: (BuildContext context) => new AddTaskPage());
+  AddTaskPageRoute(GlobalKey<ScaffoldState> scaffordKey)
+      : super(
+          builder: (BuildContext context) => new AddTaskPage(
+                mainPageKey: scaffordKey,
+              ),
+        );
 }
 
 class FilterTaskPageRoute extends CupertinoPageRoute {
