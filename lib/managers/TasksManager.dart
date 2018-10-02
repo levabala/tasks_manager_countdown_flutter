@@ -9,7 +9,12 @@ class _TasksManager {
   DateTime minDeadline = new DateTime(2100);
   List<TaskC> tasks = [];
 
-  void addTask({TaskC task, bool oneOfMany = false}) {
+  bool isNameFree(String name) {
+    return !tasks.any((t) => t.name.toLowerCase() == name.toLowerCase());
+  }
+
+  bool addTask({TaskC task, bool oneOfMany = false}) {
+    if (!isNameFree(task.name)) return false;
     tasks.add(task);
     if (task.deadline.compareTo(maxDeadline) == 1) maxDeadline = task.deadline;
     if (task.deadline.compareTo(minDeadline) == -1) minDeadline = task.deadline;
@@ -21,6 +26,8 @@ class _TasksManager {
       eventBus.fire(new TasksAddedEvent([task]));
       appConfigurator.writeToStorage();
     }
+
+    return true;
   }
 
   void removeTask({TaskC task, bool oneOfMany = false}) {

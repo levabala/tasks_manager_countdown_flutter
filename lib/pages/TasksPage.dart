@@ -14,7 +14,7 @@ class TasksPage extends StatefulWidget {
 }
 
 class _TasksPageState extends State<TasksPage> {
-  List<Widget> bottomAppBarIcons = [
+  List<Widget> iconsDefault = [
     IconButton(
       icon: Icon(Icons.menu),
       onPressed: () {},
@@ -24,9 +24,26 @@ class _TasksPageState extends State<TasksPage> {
       onPressed: () {},
     )
   ];
+  List<Widget> iconsCheckedActions = [
+    IconButton(
+      icon: Icon(Icons.delete),
+      onPressed: () {},
+    ),
+    IconButton(
+      icon: Icon(Icons.dashboard),
+      onPressed: () {},
+    ),
+    IconButton(
+      icon: Icon(Icons.close),
+      onPressed: () {},
+    )
+  ];
+
+  void updateBottomAppBar() {}
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> bottomAppBarIcons = iconsDefault;
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(widget.title),

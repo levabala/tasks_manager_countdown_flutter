@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:todo_countdown/classes/TasksViewConfig.dart';
 import 'package:todo_countdown/other/StringGenerators.dart';
+import 'package:todo_countdown/widgets/TasksListView.dart';
 
 class TaskListItem extends StatefulWidget {
   final TaskC task;
@@ -53,6 +54,14 @@ class TaskListItemState extends State<TaskListItem> {
         : (happened ? 1 - diffFromMaxMs / maxRange : diffFromMaxMs / maxRange);
     coeff = pow(coeff, widget.viewConfig.valuePower);
 
+    void updateParentsInfoAboutMe() {
+      var state = TasksListView.of(context);
+      state.checkedTaskNames[widget.task.name] = checked;
+      print(state.checkedTaskNames);
+    }
+
+    updateParentsInfoAboutMe();
+
     return ListTile(
       title: new Container(
         margin: EdgeInsets.only(bottom: 3.0),
@@ -89,6 +98,7 @@ class TaskListItemState extends State<TaskListItem> {
         onChanged: (val) {
           setState(() {
             checked = val;
+            updateParentsInfoAboutMe();
           });
         },
       ),

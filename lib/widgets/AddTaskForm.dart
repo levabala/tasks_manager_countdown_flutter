@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_countdown/managers/TasksManager.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_countdown/classes/TaskC.dart';
@@ -36,11 +37,13 @@ class AddTaskFormState extends State<AddTaskForm> {
             ),
             textCapitalization: TextCapitalization.words,
             onEditingComplete: () {
-              widget.formKey.currentState.validate();
+              //widget.formKey.currentState.validate();
             },
             validator: (value) {
               if (value.isEmpty) {
                 return 'Please enter some text';
+              } else if (!tasksManager.isNameFree(value)) {
+                return 'Task with the name already exists';
               }
             },
             onSaved: (name) {
@@ -54,7 +57,7 @@ class AddTaskFormState extends State<AddTaskForm> {
                 InputDecoration(hintText: "Task description (multiline)..."),
             textCapitalization: TextCapitalization.sentences,
             onEditingComplete: () {
-              widget.formKey.currentState.validate();
+              //widget.formKey.currentState.validate();
             },
             onSaved: (description) {
               task.description = description;
@@ -67,7 +70,7 @@ class AddTaskFormState extends State<AddTaskForm> {
               hintText: "Finish date&time",
             ),
             onChanged: (date) {
-              widget.formKey.currentState.validate();
+              //widget.formKey.currentState.validate();
             },
             validator: (value) {
               if (value == null) {
