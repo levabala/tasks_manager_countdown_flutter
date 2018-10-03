@@ -13,12 +13,22 @@ class _AppConfigurator {
     prefs.setString("tasks", tasksManager.toJSON());
   }
 
+  Future<bool> clearStorage() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.clear();
+  }
+
+  resetManagers() {
+    filtersManager.reset();
+    tasksManager.reset();
+  }
+
   void loadFromStorage() async {
     final prefs = await SharedPreferences.getInstance();
     var keys = prefs.getKeys();
     if (keys.length == 0) {
       filtersManager.setFilter(
-          id: "filter1", filter: Filter(name: "main", range: Range(0, 1)));
+          id: "default", filter: Filter(name: "main", range: Range(0, 1)));
     } else {
       if (keys.contains("filters"))
         filtersManager.loadJSONData(prefs.getString("filters"));

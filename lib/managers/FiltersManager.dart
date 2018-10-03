@@ -3,11 +3,17 @@ import 'package:todo_countdown/classes/Filter.dart';
 import 'package:todo_countdown/managers/AppConfigurator.dart';
 
 class _FiltersManager {
-  Map<String, Filter> filters = {};
+  Map<String, Filter> filters = {
+    "default": Filter(),
+  };
 
   void setFilter({String id, Filter filter, bool finalized = true}) {
     filters[id] = filter;
     if (finalized) appConfigurator.writeToStorage();
+  }
+
+  void reset() {
+    filters.clear();
   }
 
   void removeFilter(String id) {

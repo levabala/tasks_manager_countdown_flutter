@@ -56,8 +56,7 @@ class TaskListItemState extends State<TaskListItem> {
 
     void updateParentsInfoAboutMe() {
       var state = TasksListView.of(context);
-      state.checkedTaskNames[widget.task.name] = checked;
-      print(state.checkedTaskNames);
+      state.updateTaskChecked(taskName: widget.task.name, checked: checked);
     }
 
     updateParentsInfoAboutMe();

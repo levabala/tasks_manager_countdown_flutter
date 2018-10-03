@@ -64,7 +64,6 @@ class AddTaskFormState extends State<AddTaskForm> {
             },
           ),
           DateTimePickerFormField(
-            dateOnly: true,
             format: new DateFormat("'Finish date:' MMMM d, yyyy 'at' h:mma"),
             decoration: InputDecoration(
               hintText: "Finish date&time",

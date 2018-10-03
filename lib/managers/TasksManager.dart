@@ -13,6 +13,12 @@ class _TasksManager {
     return !tasks.any((t) => t.name.toLowerCase() == name.toLowerCase());
   }
 
+  void reset() {
+    maxDeadline = DateTime.fromMicrosecondsSinceEpoch(0);
+    minDeadline = new DateTime(2100);
+    tasks = [];
+  }
+
   bool addTask({TaskC task, bool oneOfMany = false}) {
     if (!isNameFree(task.name)) return false;
     tasks.add(task);
@@ -54,6 +60,24 @@ class _TasksManager {
     addTasks(tasksToAdd);
   }
 
+  List<TaskC> getAllTaskAfterNow({List<TaskC> tasks}) {
+    if (tasks == null) tasks = this.tasks;
+    if (tasks.length == 0) return [];
+    return tasks
+        .where(
+            (task) => task.deadlineMs > DateTime.now().millisecondsSinceEpoch)
+        .toList();
+  }
+
+  List<TaskC> getAllTaskBeforeNow({List<TaskC> tasks}) {
+    if (tasks == null) tasks = this.tasks;
+    if (tasks.length == 0) return [];
+    return tasks
+        .where(
+            (task) => task.deadlineMs < DateTime.now().millisecondsSinceEpoch)
+        .toList();
+  }
+
   String toJSON() {
     List<String> data = [];
     for (var task in tasks) {
@@ -61,6 +85,16 @@ class _TasksManager {
     }
     var json = jsonEncode(data);
     return json;
+  }
+
+  TaskC findLatestTask(List<TaskC> tasks) {
+    return tasks.reduce((maxTask, task) =>
+        task.deadlineMs > maxTask.deadlineMs ? task : maxTask);
+  }
+
+  TaskC findEarliestTask(List<TaskC> tasks) {
+    return tasks.reduce((maxTask, task) =>
+        task.deadlineMs < maxTask.deadlineMs ? task : maxTask);
   }
 }
 
