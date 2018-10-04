@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_range_slider/flutter_range_slider.dart';
 import 'package:todo_countdown/classes/Filter.dart';
@@ -6,7 +7,6 @@ import 'package:todo_countdown/managers/AppConfigurator.dart';
 import 'package:todo_countdown/managers/FiltersManager.dart';
 import 'package:todo_countdown/managers/ViewConfigsManager.dart';
 import 'package:todo_countdown/other/StringGenerators.dart';
-import 'dart:math';
 
 class FilterTaskPage extends StatefulWidget {
   @override
@@ -16,10 +16,9 @@ class FilterTaskPage extends StatefulWidget {
 }
 
 class FilterTaskPageState extends State<FilterTaskPage> {
-  final _scaffoldKey = new GlobalKey<ScaffoldState>();
+  String timeDeltaStr = remainTimeToString(0);
   double _lowerValue = 0.0, _upperValue = 0.3, power = 5.0;
   int timeDeltaMs = 0;
-  String timeDeltaStr = remainTimeToString(0);
   int maxPossibleMs =
       DateTime.now().add(Duration(days: 365)).millisecondsSinceEpoch;
   int get diffNowAndMax {
@@ -62,7 +61,6 @@ class FilterTaskPageState extends State<FilterTaskPage> {
       top: false,
       bottom: false,
       child: new Scaffold(
-        key: _scaffoldKey,
         appBar: new AppBar(
           title: new Text("Filter tasks"),
         ),

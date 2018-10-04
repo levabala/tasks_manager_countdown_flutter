@@ -1,3 +1,4 @@
+// structure for storing taskItem rendering info
 class TasksViewConfig {
   double valuePower;
   bool showPastTasks;

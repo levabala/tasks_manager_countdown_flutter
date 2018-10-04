@@ -7,15 +7,18 @@ import 'package:todo_countdown/pages/TasksFilterPage.dart';
 
 class TasksPage extends StatefulWidget {
   final title = "My Tasks";
+  // the thing what we use to set theming of our tasks' view
   final viewConfig = new TasksViewConfig();
 
   @override
-  _TasksPageState createState() => new _TasksPageState();
+  TasksPageState createState() => new TasksPageState();
 }
 
-class _TasksPageState extends State<TasksPage> {
+class TasksPageState extends State<TasksPage> {
+  // we use scafforKey to show pretty nice snackbar from TasksFilterPage
   final scaffoldKey = new GlobalKey<ScaffoldState>();
 
+  // "inactive" icons preset for bottomAppBar
   List<Widget> iconsDefault = [
     IconButton(
       icon: Icon(Icons.menu),
@@ -26,6 +29,7 @@ class _TasksPageState extends State<TasksPage> {
       onPressed: () {},
     )
   ];
+  // this set we use when any listView items (tasks) are checked
   List<Widget> iconsCheckedActions = [
     IconButton(
       icon: Icon(Icons.delete),
@@ -41,10 +45,18 @@ class _TasksPageState extends State<TasksPage> {
     )
   ];
 
-  void updateBottomAppBar() {}
+  // callback handlers
+  void onAnyChecked() {
+    //How to connect with TasksListView?
+  }
+
+  void onAllUnchecked() {
+    //How to connect with TasksListView?
+  }
 
   @override
   Widget build(BuildContext context) {
+    // current bar icons set
     List<Widget> bottomAppBarIcons = iconsDefault;
     return new Scaffold(
       key: scaffoldKey,
@@ -54,12 +66,18 @@ class _TasksPageState extends State<TasksPage> {
           IconButton(
             icon: new Icon(Icons.filter_list),
             onPressed: () {
+              // make navigating to filters page
               Navigator.of(context).push(FilterTaskPageRoute());
             },
           )
         ],
       ),
-      body: new TasksListView(),
+      // for now body is only ListView (i suppose only now)
+      body: new TasksListView(
+        onAnyCheckedCallback: onAnyChecked,
+        onAllUnchecked: onAllUnchecked,
+      ),
+      // let's use it for adding new task
       floatingActionButton: new FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(AddTaskPageRoute(scaffoldKey));
@@ -67,20 +85,20 @@ class _TasksPageState extends State<TasksPage> {
         tooltip: 'Increment',
         child: new Icon(Icons.add),
       ),
-      bottomNavigationBar: AnimatedContainer(
-        duration: Duration(seconds: 3),
-        child: BottomAppBar(
-          child: new Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: bottomAppBarIcons,
-          ),
+      // here we have buttons for operations on checked tasks
+      bottomNavigationBar: BottomAppBar(
+        child: new Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: bottomAppBarIcons,
         ),
       ),
     );
   }
 }
 
+// i use custom routes for navigating from page to page
+// (sliding horizontally)
 class AddTaskPageRoute extends CupertinoPageRoute {
   AddTaskPageRoute(GlobalKey<ScaffoldState> scaffordKey)
       : super(
@@ -90,6 +108,7 @@ class AddTaskPageRoute extends CupertinoPageRoute {
         );
 }
 
+// yeah, we need to create it for each Route
 class FilterTaskPageRoute extends CupertinoPageRoute {
   FilterTaskPageRoute()
       : super(builder: (BuildContext context) => new FilterTaskPage());

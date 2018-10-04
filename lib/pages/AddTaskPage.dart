@@ -14,6 +14,7 @@ class AddTaskPage extends StatefulWidget {
 }
 
 class AddTaskPageState extends State<AddTaskPage> {
+  // keys for communicating with TasksAddForm
   final addTaskFormKey = new GlobalKey<FormState>();
   final addTaskStateKey = new GlobalKey<AddTaskFormState>();
 
@@ -31,22 +32,26 @@ class AddTaskPageState extends State<AddTaskPage> {
               formKey: addTaskFormKey,
               stateKey: addTaskStateKey,
             ),
+            // maybe here would be some more elements?
           ],
         ),
       ),
       floatingActionButton: new FloatingActionButton(
+        // form validating and sending
         onPressed: () {
           FormState formState = addTaskFormKey.currentState;
           bool validated = formState.validate();
           if (validated) {
+            // say every form field to save data into form's task instance
             formState.save();
+            // getting task instance
             TaskC task = addTaskStateKey.currentState.task;
             tasksManager.addTask(task: task);
-
+            // showing snackbar on main page
             widget.mainPageKey.currentState
                 .showSnackBar(SnackBar(content: Text('Task added')));
+            // instantly after return to main page
             Navigator.of(context).pop();
-            //FocusScope.of(context).requestFocus(new FocusNode());
           }
         },
         tooltip: 'Save',

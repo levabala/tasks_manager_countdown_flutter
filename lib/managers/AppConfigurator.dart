@@ -1,6 +1,5 @@
+import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:todo_countdown/classes/Filter.dart';
-import 'package:todo_countdown/classes/Range.dart';
 import 'package:todo_countdown/classes/TaskC.dart';
 import 'package:todo_countdown/managers/TasksManager.dart' show tasksManager;
 import 'package:todo_countdown/managers/FiltersManager.dart'
@@ -27,8 +26,7 @@ class _AppConfigurator {
     final prefs = await SharedPreferences.getInstance();
     var keys = prefs.getKeys();
     if (keys.length == 0) {
-      filtersManager.setFilter(
-          id: "default", filter: Filter(name: "main", range: Range(0, 1)));
+      // nothing here yet
     } else {
       if (keys.contains("filters"))
         filtersManager.loadJSONData(prefs.getString("filters"));
@@ -37,6 +35,7 @@ class _AppConfigurator {
     }
   }
 
+  // some mock data
   void loadTestData() {
     List<TaskC> testTasks = [
       new TaskC(
@@ -73,4 +72,5 @@ class _AppConfigurator {
   }
 }
 
+// also global instance
 _AppConfigurator appConfigurator = _AppConfigurator();

@@ -1,5 +1,6 @@
 import 'package:intl/intl.dart';
 
+// nice string formatter :)
 String remainTimeToString(int ms) {
   bool happened = ms <= 0;
   ms = ms.abs();

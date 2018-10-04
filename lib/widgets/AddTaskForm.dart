@@ -14,12 +14,8 @@ class AddTaskForm extends StatefulWidget {
   }
 }
 
-class TaskAddFormState extends FormState {
-  TaskC task = new TaskC(name: "none");
-  TaskAddFormState();
-}
-
 class AddTaskFormState extends State<AddTaskForm> {
+  // local task instance
   TaskC task = new TaskC(name: "none");
 
   @override
@@ -30,15 +26,15 @@ class AddTaskFormState extends State<AddTaskForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           TextFormField(
+            // instantly open keyboard focused on the textfield
             autofocus: true,
             keyboardType: TextInputType.text,
+            // dome decor..
             decoration: InputDecoration(
               hintText: "Task name...",
             ),
+            // to start priting from capital letter
             textCapitalization: TextCapitalization.words,
-            onEditingComplete: () {
-              //widget.formKey.currentState.validate();
-            },
             validator: (value) {
               if (value.isEmpty) {
                 return 'Please enter some text';
@@ -47,18 +43,18 @@ class AddTaskFormState extends State<AddTaskForm> {
               }
             },
             onSaved: (name) {
+              // record data
               task.name = name;
             },
           ),
           TextFormField(
+            // expandable
             keyboardType: TextInputType.multiline,
+            // to have unlimited count of lines
             maxLines: null,
             decoration:
                 InputDecoration(hintText: "Task description (multiline)..."),
             textCapitalization: TextCapitalization.sentences,
-            onEditingComplete: () {
-              //widget.formKey.currentState.validate();
-            },
             onSaved: (description) {
               task.description = description;
             },
@@ -68,10 +64,8 @@ class AddTaskFormState extends State<AddTaskForm> {
             decoration: InputDecoration(
               hintText: "Finish date&time",
             ),
-            onChanged: (date) {
-              //widget.formKey.currentState.validate();
-            },
             validator: (value) {
+              // if user discarded picking date
               if (value == null) {
                 return 'Please pick a date';
               }

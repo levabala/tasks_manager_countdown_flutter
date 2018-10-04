@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 class Range {
   final int _from, _to;
 
+  // we have getters to realize RangeDynamic
   int get from {
     return _from;
   }
@@ -53,6 +54,8 @@ class RangeDynamic extends Range {
     return toGetter();
   }
 
+  // setting getters for "from" and "to"
+  // for example: using DateTime.now() as "from" value
   RangeDynamic({@required this.fromGetter, @required this.toGetter})
       : super(fromGetter(), toGetter());
 }

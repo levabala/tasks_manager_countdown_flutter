@@ -35,6 +35,8 @@ class TaskListItemState extends State<TaskListItem> {
     int diffMs = taskDeadlineMs - nowMs;
     bool happened = diffMs <= 0;
     int maxDeadlineMs, minDeadlineMs, diffFromMaxMs, maxRange;
+
+    // we're creating different data for past and future events
     if (happened) {
       maxDeadlineMs = widget.maxDeadlinePast.millisecondsSinceEpoch;
       minDeadlineMs = widget.minDeadlinePast.millisecondsSinceEpoch;
@@ -49,29 +51,36 @@ class TaskListItemState extends State<TaskListItem> {
       diffMs = diffMs.abs();
     }
 
+    // calcing coeff relative on is the task "happened"
     double coeff = maxRange == 0.0
         ? 1.0
         : (happened ? 1 - diffFromMaxMs / maxRange : diffFromMaxMs / maxRange);
+    // applying powering to see progressive plot
     coeff = pow(coeff, widget.viewConfig.valuePower);
 
+    // calling parent about checking the item
     void updateParentsInfoAboutMe() {
-      var state = TasksListView.of(context);
-      state.updateTaskChecked(taskName: widget.task.name, checked: checked);
+      TasksListView.of(context)
+          .updateTaskChecked(taskName: widget.task.name, checked: checked);
     }
 
+    // let's say that we exist
     updateParentsInfoAboutMe();
 
     return ListTile(
+      // just task name as text
       title: new Container(
         margin: EdgeInsets.only(bottom: 3.0),
         child: Text(widget.task.name),
       ),
+      // we create colored container with width which depends on "coeff"
       subtitle: new Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             new Container(
               width: coeff == 0.0
+                  // 2.0 - is a minimal width (TODO: make declared)
                   ? 2.0
                   : MediaQuery.of(buildContext).size.width * coeff,
               decoration: new ShapeDecoration(
@@ -81,6 +90,7 @@ class TaskListItemState extends State<TaskListItem> {
                 ),
               ),
             ),
+            // under we have just some additional info'bout task
             new Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -91,6 +101,7 @@ class TaskListItemState extends State<TaskListItem> {
           ],
         ),
       ),
+      // a thing for checking our task
       leading: Checkbox(
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         value: checked,

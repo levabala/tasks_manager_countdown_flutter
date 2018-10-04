@@ -5,8 +5,11 @@ import 'package:flutter/foundation.dart';
 class TaskC {
   String name;
   String description;
+  // not using now
   double progress;
+  // finish time
   DateTime deadline;
+  // shortcut for milliseconds
   int get deadlineMs {
     return deadline.millisecondsSinceEpoch;
   }

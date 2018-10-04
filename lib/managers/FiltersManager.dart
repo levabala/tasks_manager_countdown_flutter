@@ -9,6 +9,7 @@ class _FiltersManager {
 
   void setFilter({String id, Filter filter, bool finalized = true}) {
     filters[id] = filter;
+    // the same logic as for _TasksManager
     if (finalized) appConfigurator.writeToStorage();
   }
 
